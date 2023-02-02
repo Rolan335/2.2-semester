@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="script.js"></script>
+    <script>
+        console.log(this)
+        // this == window (окно браузера)
+        // BOM = Browser Object Model
+        // console.log(window.innerHeight)
+        // ==
+        // console.log(innerHeight) == vh100 в px
+        // console.log(innerWidth) == vw100 в px
+
+        //диалоговые окна
+        // let name = prompt("Как твоё имя?", "default")
+        // console.log(name)
+        // let isRolan = confirm("Your name is Rolan?")
+        // console.log(isRolan)
+        // let str = isRolan && name.toLowerCase() == "rolan" ? "Hello Rolan" : "You are not Rolan"
+        // alert(str)
+
+
+
+
+        // screen - монитор компьютера
+        // console.log(screen)
+        // console.log(navigator.userAgent)
+        
+        // history - история посещений на текущей вкладке
+        // history.back - имитация кнопки назад
+        // history.forward - имитация кнопки вперёд
+
+        // location - адресная строка браузера
+        // console.log(location)
+        // location.href возвращает ссылку(URL) текущей страницы
+        //     location.hostname возвращает доменное имя веб - хоста
+        //     location.pathname возвращает путь и имя файла текущей страницы
+        //     location.protocol возвращает использованный веб - протокол(http: или https: )
+        //     location.port возвращает номер порта интернет хоста(текущей страницы)
+
+        // location.reload()
+        // location.replace("https://google.com")
+    </script>
+</body>
+</html>
