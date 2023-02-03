@@ -47,3 +47,5 @@ function solveEq(a, b, c, acc) {
     return x
 }
 console.log(solveEq(4, 3, 5, 0.0001))
+
+//Вычислительная сложность O(1 + n + log(n))
