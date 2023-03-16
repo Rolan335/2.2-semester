@@ -17,11 +17,15 @@ form {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     padding: 30px;
-    background-color: #000;
+    background-color: #fff;
     color: #fff;
     border-radius: 15px;
     background-size: cover;
     position: relative;
+}
+
+.card__system{
+    z-index: 100;
 }
 
 form{

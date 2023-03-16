@@ -14,13 +14,12 @@
     <div class="wrapper">
         <form action="" id="form">
             <label for="">Пока поддерживаем только Тинькофф и Сбербанк<input type="text" placeholder="Название банка"
-                    required></label>
-            <label for="">(Visa/MasterCard)<input type="text" placeholder="Тип платёжной системы" required></label>
-            <input type="text" minlength="16" maxlength="16" placeholder="Номер карты" required>
-            <input type="text" placeholder="Имя держателя карты" required>
-            <input type="text" placeholder="Месяц и год окончания" required>
-            <input type="submit" value="Применить на макет">
-            <input type="reset" value="Отправить данные в таблицу">
+                    required class="input__bank"></label>
+            <label for="">(Visa/MasterCard)<input type="text" placeholder="Тип платёжной системы" required class="input__paymentType"></label>
+            <input type="text" minlength="16" maxlength="16" placeholder="Номер карты" required class="input__num">
+            <input type="text" placeholder="Имя держателя карты" class="input__name" required>
+            <input type="text" placeholder="Месяц и год окончания" required class="input__expire">
+            <input type="submit" value="Отправить" class="submit">
         </form>
         <div class="card">
             <div class="card__number"></div>
