@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="../functions.js"></script>
+    <title>KT3</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <form action="" id="form">
+            <label for="">Пока поддерживаем только Тинькофф и Сбербанк<input type="text" placeholder="Название банка"
+                    required></label>
+            <label for="">(Visa/MasterCard)<input type="text" placeholder="Тип платёжной системы" required></label>
+            <input type="text" minlength="16" maxlength="16" placeholder="Номер карты" required>
+            <input type="text" placeholder="Имя держателя карты" required>
+            <input type="text" placeholder="Месяц и год окончания" required>
+            <input type="submit" value="Применить на макет">
+            <input type="reset" value="Отправить данные в таблицу">
+        </form>
+        <div class="card">
+            <div class="card__number"></div>
+            <div class="card__expire"></div>
+            <div class="card__name"></div>
+            <div class="card__system"></div>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <th>Название банка</th>
+            <th>Тип платёжной системы</th>
+            <th>Номер карты</th>
+            <th>Имя держателя карты</th>
+            <th>Месяц и год окончания карты</th>
+        </tr>
+    </table>
+    <script src="script.js"></script>
+</body>
+
+</html>
