@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+        .slider {
+            position: relative;
+            top: 100px;
+            left: 100px;
+            width: 400px;
+            height: 2px;
+            background-color: grey;
+            position: relative;
+        }
+
+        .slider__thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid grey;
+            position: absolute;
+            top: -9px;
+            left: 0;
+            cursor: pointer;
+        }
+
+        .slider__range {
+            height: 100%;
+            background-color: green;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .slider__value {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slider">
+        <div class="slider__thumb"></div>
+        <div class="slider__range"></div>
+        <div class="slider__value"></div>
+    </div>
+
+    <script>
+        const thumb = document.querySelector('.slider__thumb');
+        const range = document.querySelector('.slider__range');
+        const value = document.querySelector('.slider__value');
+        const slider = document.querySelector('.slider');
+
+        function getPosition(el) {
+            let xPos = 0;
+            while (el) {
+                xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+                el = el.offsetParent;
+            }
+            return xPos;
+        }
+
+        function updateThumb(posX) {
+            thumb.style.left = `${posX}px`;
+            range.style.width = `${posX}px`;
+            const valueText = Math.round(posX / slider.offsetWidth * 100);
+            value.innerHTML = `${valueText}%`;
+            value.style.left = `${posX - 5}px`
+        }
+
+        thumb.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+        function onMouseMove(event) {
+            const sliderPosX = getPosition(slider);
+            const posX = event.clientX - sliderPosX;
+            if (posX >= 0 && posX <= slider.offsetWidth) {
+                updateThumb(posX);
+            }
+        }
+
+        function onMouseUp() {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        }
+    </script>
+</body>
+
+</html>
