@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="demo-1.xsl" ?>
+
+<pricelist>
+	<book id="1">
+		<title>XML и MS Edge</title>
+		<author>Алекс Гомер</author>
+		<price>1200</price>
+	</book>
+	
+	<book id="2">
+		<title>Dimanic HTML</title>
+		<author>Алекс Хоумер</author>
+		<price>1120</price>
+	</book>
+	
+	<book id="3">
+		<title>Технология XSLT</title>
+		<author>Алексей Валиков</author>
+		<price>1500</price>
+	</book>
+
+	<book id="4">
+		<title>XSLT</title>
+		<author>Стивен Холзнер</author>
+		<price>1700</price>
+	</book>
+
+	<book id="5">
+		<title>Практическая криптография</title>
+		<author>Михаил Масленников</author>
+		<price>2000</price>
+	</book>
+
+	<book id="6">
+		<title>Реестр Windows 11</title>
+		<author>Джерри Хонейкатт</author>
+		<price>2500</price>
+	</book>
+
+	<book id="7">
+		<title>Windows 11. Средства повышения производительности</title>
+		<author>Уолтер Брюс</author>
+		<price>2500</price>
+	</book>
+	
+	<book id="8">
+		<title>Windows Script Host для Windows 11</title>
+		<author>Андрей Попов</author>
+		<price>2200</price>
+	</book>
+	
+	<book id="9">
+		<title>Excel 2020. Библия пользователя</title>
+		<author>Джон Уокенбах</author>
+		<price>2600</price>
+	</book>
+	
+	<book id="10">
+		<title>XML. Справочник</title>
+		<author>Сандра Э. Эдди</author>
+		<price>1000</price>
+	</book>
+
+	<book id="11">
+		<title>Разработка защищенных Web-приложений на платформе Windows 11</title>
+		<author>Майкл Ховард</author>
+		<price>2500</price>
+	</book>
+	
+	<book id="12">
+		<title>WAP-программирование на языке WML</title>
+		<author>Михаэль Зеебергер-Вайхсельбаум</author>
+		<price>1500</price>
+	</book>
+</pricelist>

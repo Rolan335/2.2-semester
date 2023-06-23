@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&display=swap');
+
+body {
+    margin: 0;
+    font-family: "Rubik 80s Fade", cursive;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+    justify-content: center;
+    align-content: center;
+    background-color: mediumturquoise;
+    padding: 30px;
+}
+.sq {
+    width: 200px;
+    height: 200px;
+    background-color: #222;
+    color: #fff;
+    font-size: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 20px;
+    align-content: center;
+    justify-content: center;
+}
+.sq :nth-child(1), .sq :nth-child(2) {
+    align-self: flex-end;
+}
+.sq :nth-child(3), .sq :nth-child(4) {
+    align-self: flex-start;
+}
+.sq :nth-child(2n-1) {
+    justify-self: right;
+}
+.sq :nth-child(2n) {
+    justify-self: left;
+}
+.sq span {
+    width: max-content;
+}

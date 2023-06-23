@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <xs:element name="notebook">
+            <xs:simpleType name="indexRestr">
+                <xs:restriction base="xs:string">
+                    <xs:length value="6"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="phoneRestr">
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="\d{3}-\d{2}-\d{2}"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="offices" maxOccurs="1">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element type="xs:string" name="office" minOccurs="1" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                                <xs:unique>
+                                                    <xs:attribute name="code" use="required"/>
+                                                </xs:unique>
+                                            </xs:extension>
+                                        </xs:simpleContent>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="person" minOccurs="1" maxOccurs="unbounded">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="name" maxOccurs="1" use="required">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="first" type="xs:string"/>
+                                            <xs:element name="surname" type="xs:string"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element name="address" maxOccurs="1" use="required">
+                                    <xs:complexType>
+                                        <xs:choice>
+                                            <xs:element name="city" type="xs:string"/>
+                                            <xs:element name="street" type="xs:string"/>
+                                            <xs:element name="index" type="indexRestr">
+
+                                            </xs:element>
+                                        </xs:choice>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element name="phones" maxOccurs="1" use="required">
+                                    <xs:complexType>
+                                        <xs:all>
+                                            <xs:element name="phone" type="phoneRestr">
+                                                <xs:complexType>
+                                                    <xs:attribute name="type" type="xs:string" value="work home" use="optional"/>
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:all>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:extension base="xs:string">
+                                    <xs:unique>
+                                        <xs:attribute name="id" use="required"/>
+                                    </xs:unique>
+                                    <xs:attribute name="office" ref="office"/>
+                                </xs:extension>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:schema>
+
+    <notebook id="1" office="a">
+        <offices>
+            <office code="a">
+            Москва
+            </office>
+            <office code="b">
+            СПБ
+            </office>
+            <person>
+                <name>
+                    <first>
+                    Алексей
+                    </first>
+                    <surname>
+                    Ерёменко
+                    </surname>
+                </name>
+                <address>
+                    <city>Москва</city>
+                    <street>Проектируемый проезд 124</street>
+                    <index>142493</index>
+                </address>
+                <phones>
+                    <phone type="work">
+                    999-99-99
+                    </phone>
+                </phones>
+            </person>
+        </offices>
+    </notebook>
+</root>

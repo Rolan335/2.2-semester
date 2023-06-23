@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<item>
+	<element name="computer" value="Intel Core Duo"/>
+	<element name="monitor" value="Dell 23'"/>
+	<element name="computer" value="Intel Core i5"/>
+	<element name="computer" value="Intel Core i7"/>
+	<element name="printer" value="LBP 2900"/>
+	<element name="monitor" value="HP 21'"/>
+	<element name="printer" value="Canon 3211"/>
+		<element name="computer" value="Intel Core i7"/>
+			<element name="computer" value="Intel Core i7"/>
+</item>

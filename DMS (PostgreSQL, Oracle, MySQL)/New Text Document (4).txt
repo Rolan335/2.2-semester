@@ -1,0 +1,160 @@
+Create or replace procedure Client_Update (p_ID_Client int,p_Client_Organization_Name varchar(100),p_Client_Legal_Address varchar(100),
+									p_Client_Physical_Address varchar(100), p_Client_ITN varchar(10), p_Client_BIC varchar(9), p_Client_OKPO varchar(10),
+									p_Client_Repr_Surname varchar(30), p_Client_Repr_Name varchar(30), p_Client_Repr_Second_Name varchar(30) )
+language plpgsql
+as $$
+	
+	declare p_Exists_Record smallint := count(*) from Client where ID_Client = p_ID_Client;
+	
+		begin
+		if p_Exists_Record = 0 then
+			raise notice 'Невозможно обновить данные. Клиента с введёным идентификатором не существует';
+			
+		else
+				update Client set
+						Client_Organization_Name = p_Client_Organization_Name,
+						Client_Legal_Address = p_Client_Legal_Address,
+						Client_Physical_Address = p_Client_Physical_Address,
+						Client_ITN = p_Client_ITN,
+						Client_BIC = p_Client_BIC,
+						Client_OKPO = p_Client_OKPO,
+						Client_Repr_Surname = p_Client_Repr_Surname,
+						Client_Repr_Name = p_Client_Repr_Name,
+						Client_Repr_Second_Name = p_Client_Repr_Second_Name
+					where ID_Client = p_ID_Client;
+		end if;
+		exception when SQLSTATE '23514' or SQLSTATE '22001' then 
+			raise notice 'Данные не могут быть добавлены. Проверьте правильность заполнения полей и повторите попытку';
+		when SQLSTATE '23505' then
+			raise notice 'Введённые данные не являются уникальными';
+		when others then 
+			raise notice '% %', 'Данные не могут быть добавлены. Код ошибки -', SQLSTATE;
+
+	end;
+
+$$;
+
+Create or replace procedure Client_Insert (p_Client_Organization_Name varchar(100),p_Client_Legal_Address varchar(100),
+									p_Client_Physical_Address varchar(100), p_Client_ITN varchar(10), p_Client_BIC varchar(9), p_Client_OKPO varchar(10),
+									p_Client_Repr_Surname varchar(30), p_Client_Repr_Name varchar(30), p_Client_Repr_Second_Name varchar(30) )
+language plpgsql
+as $$
+
+	
+
+		declare p_Exists_Record smallint := count(*) from Client where Client_ITN = p_Client_ITN and 
+																   Client_BIC = p_Client_BIC and 
+																   Client_OKPO = p_Client_OKPO;
+	begin
+		if p_Exists_Record > 0 then
+			raise notice 'Клиент с введёнными данными уже есть в системе';
+		else
+			Insert into Client (Client_Organization_Name, Client_Legal_Address, Client_Physical_Address, Client_ITN, Client_BIC, Client_OKPO, Client_Repr_Surname, Client_Repr_Name, Client_Repr_Second_Name)
+			values (p_Client_Organization_Name,p_Client_Legal_Address,
+									p_Client_Physical_Address, p_Client_ITN, p_Client_BIC, p_Client_OKPO,
+									p_Client_Repr_Surname, p_Client_Repr_Name, p_Client_Repr_Second_Name);
+		end if;
+		exception when SQLSTATE '23514' or SQLSTATE '22001' then 
+			raise notice 'Данные не могут быть добавлены. Проверьте правильность заполнения полей и повторите попытку';
+		when SQLSTATE '23505' then
+			raise notice 'Введённые данные не являются уникальными';
+		when others then 
+			raise notice '% %', 'Данные не могут быть добавлены. Код ошибки -', SQLSTATE;
+
+	end;
+
+$$;
+
+Create or replace procedure Client_Delete (p_ID_Client int)
+language plpgsql
+as $$
+	begin
+	  delete from client where ID_Client = p_ID_Client;
+	  
+	  exception when SQLSTATE '23503' then
+	  	raise notice 'Данные не могут быть удалены так как на них ссылаются значения из других таблиц';
+	end;
+$$;
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Create or replace procedure Manager_Update (p_ID_Manager int, p_Manager_Surname varchar(30), p_Manager_Name varchar(30), p_Manager_Second_Name varchar(30),
+										   p_Manager_Passport_Series varchar(4), p_Manager_Passport_Number varchar(6), p_Manager_ITN varchar(10), 
+											P_Manager_SNILS varchar(14))
+language plpgsql
+as $$
+	declare p_Exists_Record smallint := count(*) from Manager where ID_Manager = p_ID_Manager;
+	begin
+		if p_Exists_Record = 0 then
+			raise notice 'Невозможно обновить данные. Менеджера с введёным идентификатором не существует';
+			
+		else
+				update Manager set
+					Manager_Surname = p_Manager_Surname,
+					Manager_Name = p_Manager_Name,
+					Manager_Second_Name = p_Manager_Second_Name,
+					Manager_Passport_Series = p_Manager_Passport_Series,
+					Manager_Passport_Number = p_Manager_Passport_Number,
+					Manager_ITN = p_Manager_ITN,
+					Manager_SNILS = p_Manager_SNILS
+						where ID_Manager = p_ID_Manager;
+		end if;
+		exception when SQLSTATE '23514' or SQLSTATE '22001' then 
+			raise notice 'Данные не могут быть добавлены. Проверьте правильность заполнения полей и повторите попытку';
+		when SQLSTATE '23505' then
+			raise notice 'Введённые данные не являются уникальными';
+		when others then 
+			raise notice '% %', 'Данные не могут быть добавлены. Код ошибки -', SQLSTATE;
+	end;
+$$;
+
+
+
+
+Create or replace procedure Manager_Insert (p_Manager_Surname varchar(30), p_Manager_Name varchar(30), p_Manager_Second_Name varchar(30),
+										   p_Manager_Passport_Series varchar(4), p_Manager_Passport_Number varchar(6), p_Manager_ITN varchar(10), 
+											p_Manager_SNILS varchar(14))
+language plpgsql
+as $$
+		declare p_Exists_Record smallint := count(*) from Manager where Manager_ITN = p_Manager_ITN and Manager_SNILS = p_Manager_SNILS;
+	begin
+		if p_Exists_Record > 0 then
+			raise notice 'Менеджер с введёнными данными уже есть в системе';
+			
+		else
+				Insert into Manager (Manager_Surname, Manager_Name, Manager_Second_Name,	Manager_Passport_Series,	Manager_Passport_Number,	Manager_ITN, Manager_SNILS)
+				values (p_Manager_Surname, p_Manager_Name, p_Manager_Second_Name,	p_Manager_Passport_Series,	p_Manager_Passport_Number,	p_Manager_ITN, p_Manager_SNILS);
+		end if;
+		exception when SQLSTATE '23514' or SQLSTATE '22001' then 
+			raise notice 'Данные не могут быть добавлены. Проверьте правильность заполнения полей и повторите попытку';
+		when SQLSTATE '23505' then
+			raise notice 'Введённые данные не являются уникальными';
+		when others then 
+			raise notice '% %', 'Данные не могут быть добавлены. Код ошибки -', SQLSTATE;
+
+	end;
+$$;
+
+
+
+
+Create or replace procedure Manager_Delete (p_ID_Manager int)
+language plpgsql
+as $$
+
+	begin
+		delete from Manager where ID_Manager = p_ID_Manager;
+	  
+	  exception when SQLSTATE '23503' then
+	  	raise notice 'Данные не могут быть удалены так как на них ссылаются значения из других таблиц';
+	end;
+
+$$;
+
+

@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Zeyada&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Zeyada', cursive;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 20px;
+    justify-content: center;
+    align-content: center;
+    background-color: hotpink;
+    padding: 30px;
+}
+
+.sq {
+    width: 200px;
+    height: 200px;
+    background-color: #222;
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    align-content: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.sq:nth-child(2n) {
+    text-align: right;
+}
