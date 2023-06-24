@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .slider {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            right: 50%;
+            width: 400px;
+            height: 2px;
+            background-color: grey;
+        }
+
+        .slider__thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid grey;
+            position: absolute;
+            top: -9px;
+            left: 1px;
+            cursor: pointer;
+        }
+
+        .slider__range {
+            height: 100%;
+            background-color: green;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .slider__value {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .generated-block {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #000;
+        }
+
+        .generated-blocks-container {
+            width: 5000px;
+            height: 5000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="generated-blocks-container"></div>
+    <div class="slider">
+        <div class="slider__thumb"></div>
+        <div class="slider__range"></div>
+        <div class="slider__value"></div>
+    </div>
+</body>
+<script>
+    const thumb = document.querySelector('.slider__thumb');
+    const range = document.querySelector('.slider__range');
+    const value = document.querySelector('.slider__value');
+    const slider = document.querySelector('.slider');
+    const container = document.querySelector(".generated-blocks-container");
+    const getNumber = function (a = 101, b = 0) {
+        return Math.floor(Math.random() * (a - b) + b)
+    }
+    const getColor = function (a = 100) {
+        return `rgba(${getNumber(256)},${getNumber(256)},${getNumber(256)}, ${a / 100})`
+    }
+
+    let blockWidth = 1;
+    container.addEventListener("mousemove", (event) => {
+        if (event.buttons === 1) {
+            const newBlock = document.createElement("div");
+            newBlock.classList.add("generated-block");
+            newBlock.style.left = `${event.clientX}px`;
+            newBlock.style.top = `${event.clientY}px`;
+            newBlock.style.width = `${blockWidth}px`;
+            newBlock.style.height = `${blockWidth}px`;
+            newBlock.style.backgroundColor = getColor()
+            container.appendChild(newBlock);
+        }
+    });
+
+    function getPosition(el) {
+        let xPos = 0;
+        while (el) {
+            xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+            el = el.offsetParent;
+        }
+        return xPos;
+    }
+
+    function updateThumb(posX) {
+        thumb.style.left = `${posX}px`;
+        range.style.width = `${posX}px`;
+        const valueText = Math.round(posX / slider.offsetWidth * 100);
+        blockWidth = valueText;
+        value.innerHTML = `${valueText}px`;
+        value.style.left = `${posX - 5}px`
+    }
+
+    thumb.addEventListener('mousedown', (event) => {
+        event.preventDefault();
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    });
+
+    function onMouseMove(event) {
+        const sliderPosX = getPosition(slider);
+        const posX = event.clientX - sliderPosX;
+        if (posX >= 0 && posX <= slider.offsetWidth) {
+            updateThumb(posX);
+        }
+    }
+
+    function onMouseUp() {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    }
+</script>
+
+</html>
